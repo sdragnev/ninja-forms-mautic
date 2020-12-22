@@ -68,9 +68,11 @@ final class NF_Mautic_Actions_SendToMautic extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
+        /* This quits if we don't have an existing contact ID but we never seem to actually assign that...
         if (!isset($_COOKIE['mtc_id'])) {
             return $data;
         }
+        */
 
         $contactId = $_COOKIE['mtc_id'];
 
@@ -133,7 +135,8 @@ final class NF_Mautic_Actions_SendToMautic extends NF_Abstracts_Action
         }
 
         try {
-            $contactApi->edit($contactId, $updatedData);
+            //$contactApi->edit($contactId, $updatedData);
+            $contactApi->create($updatedData);
             Ninja_Forms()->update_setting('mautic_api_last_status', sprintf('Contact "%s" Updated', $contactId));
         } catch (\Exception $e) {
             Ninja_Forms()->update_setting('mautic_api_last_status', "Error: " . $e->getMessage());

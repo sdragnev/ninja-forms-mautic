@@ -16,6 +16,8 @@
  * Copyright 2017 Stephen Ostrow .
  */
 
+require_once 'vendor/autoload.php';
+
 if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) || get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 
     throw new \Exception("Must update Ninja Forms to version 3.0 or later");
